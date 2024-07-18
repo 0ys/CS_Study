@@ -1,1 +1,46 @@
 # 운영체제
+
+### ❤️‍🔥목차
+
+- **프로세스와 스레드**
+- 주소공간
+- 인터럽트(Interrupt)
+- 시스템콜(Systemcall)
+- PCB와 **Context Switching**
+- IPC(Inter Process Communication)
+- **CPU 스케줄링**
+    - FCFS
+    - SJF
+    - SRT
+    - Priority scheduling
+    - RR
+- **데드락**
+- race condition
+- 세마포어와 뮤텍스
+- 페이징과 세크멘테이션
+- **페이지 교체 알고리즘**
+- 메모리
+    - 메모리 계층 구조
+- 파일 시스템
+- 스케줄러의 종류
+    - 장기 스케줄러
+    - 단기 스케줄러
+    - 중기 스케줄러
+- 동기와 비동기의 차이
+- 멀티스레드
+    - 장점과 단점
+- 프로세스 동기화
+    - Critical Section
+    - 해결책
+- 메모리 관리 전략
+    - 메모리 관리 배경
+    - Paging
+    - Segmentation
+- 가상 메모리
+    - 배경
+    - 가상 메모리가 하는 일
+    - Demand Paging (요구 페이징)
+    - 페이지 교체 알고리즘
+- 캐시의 지역성
+    - Locality
+    - Caching line
