@@ -20,9 +20,6 @@
 - UDP
 - DNS, 웹 통신 흐름
 - 네트워크 기기
-
----
-
 - 대칭키 & 공개키
 - HTTP & HTTPS
 - REST API, RESTful
