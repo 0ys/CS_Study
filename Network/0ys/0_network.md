@@ -259,7 +259,9 @@ TCP 통신에서 연결을 위해 사용하는 포트 번호는 유한하기 때
 
 #### HTTP와 HTTPS에 대해서 설명하고 차이점에 대해 설명해주세요.
 
-HTTP란 **서버/클라이언트 모델을 따라 데이터를 주고받기 위한 프로토콜**이다. 즉, HTTP는 인터넷에서 하이퍼텍스트를 교환하기 위한 통신 규약으로, 80번 포트를 사용하고 있다. 따라서 HTTP 서버가 80번 포트에서 요청을 기다리고 있으며, 클라이언트는 80번 포트로 요청을 보내게 된다.
+HTTP(HyperText Transfer Protocol)란 **서버/클라이언트가 서로  데이터를 주고받기 위한 프로토콜**이다. 즉, HTTP는 인터넷에서 하이퍼텍스트를 교환하기 위한 통신 규약으로, 80번 포트를 사용하고 있다. 따라서 HTTP 서버가 80번 포트에서 요청을 기다리고 있으며, 클라이언트는 80번 포트로 요청을 보내게 된다. 각기 다른 종단 시스템에서 클라이언트와 서버는 서로 HTTP 메시지를 교환하여 통신한다.
+
+HTTP는 TCP를 전송 프로토콜로 사용한다. HTTP 클라이언트는 먼저 서버에 TCP 연결을 시작한다. 이때 HTTP 클라이언트는 HTTP의 기본 포트 번호 80을 통해 서버로 TCP 연결을 시도한다. 일단 연결이 이루어지면, 브라우저와 서버 프로세스는 그들의 소켓 인터페이스를 통해 TCP로 접속한다
 
 HTTP는 1989년 팀 버너스 리(Tim Berners Lee)에 의해 처음 설계되었으며, WWW(World-Wide-Web) 기반에서 세계적인 정보를 공유하는데 큰 역할을 하였다.
 
@@ -269,23 +271,39 @@ HTTP는 암호화가 추가되지 않았기 때문에 보안에 취약한 반면
 
 개인 정보와 같은 민감한 데이터를 주고받아야 한다면 HTTPS를 이용해야 하지만, 단순한 정보 조회 등 만을 처리하고 있다면 HTTP를 이용하면 된다.
 
-#### References
-
-- [[Web] HTTP와 HTTPS 및 차이점 - MangKyu's Diary](https://mangkyu.tistory.com/98)
-
 ---
 
 ## #11
 
 #### HTTP 요청/응답 헤더의 구조를 설명해주세요.
 
-(TODO: 답변 작성하기)
+HTTP 요청과 응답 메시지는 아래와 같다.
 
-#### References
+![](./image/http-message.png)
 
-- [HTTP 구조 및 핵심 요소 - teddybearjung](https://velog.io/@teddybearjung/HTTP-%EA%B5%AC%EC%A1%B0-%EB%B0%8F-%ED%95%B5%EC%8B%AC-%EC%9A%94%EC%86%8C)
-- [[네트워크] http 란 - 인생의 로그캣](https://noahlogs.tistory.com/34?category=827412)
-- [HTTP 메시지 - MDN Web Docs](https://developer.mozilla.org/ko/docs/Web/HTTP/Messages)
+> HTTP 요청 메시지
+```
+GET /somedir/page.html HTTP/1.1     // 요청 라인
+Host: www.someschool.edu            // 헤더 라인
+Connection: close
+User-agent: Mozilla/5.0
+Accept-language: fr
+```
+Entity Body는 GET 방식에서는 비어 있고, POST 방식에서 사용된다. 만약 method가 POST라면, Entity body에는 사용자가 폼 필드에 입력(검색 엔진에 넣은 검색어)한 것을 포함한다. HTTP는 흔히 GET 방식을 사용하고 Entity body 대신 요청된 URL에 입력 데이터(폼 필드 값)를 넣는다. 예를 들어 폼에 GET 방식을 사용하고 2개의 필드를 가지면, 두 필드의 입력 값이 monkeys와 bananas라면 URL `www.somsite.com/animalsearch?monkeys&bananas` 구조를 가진다.
+
+> HTTP 응답 메시지
+```
+HTTP/1.1 200 OK                             // 상태 라인
+Connection: close                           // 헤더 라인
+Date: Tue, 18 Aug 2015 15:44:04 GMT
+Server: Apache/2.2.3 (CentOS)
+Last-Modified: Tue, 18 Aug 2015 15:11:03 GMT
+Content-Length: 6821
+Content-Type: text/html
+
+(데이터 데이터 데이터 데이터 ...)               // Entity Body
+```
+서버로부터 받아온 데이터는 Entity body에 담겨있으며, 최근 수정 시간 정보도 포함하고 있다.
 
 ---
 
@@ -307,7 +325,10 @@ HTTP는 암호화가 추가되지 않았기 때문에 보안에 취약한 반면
 
 #### CORS가 무엇인가요?
 
-교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 **추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제**이다.
+교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제이다. 쉽게 말해서 CORS는 웹 페이지가 다른 브라우저에 있는 자원에 접근할 수 있도록 해주는 보안 메커니즘이다. 
+
+Cross-Origin의 판단 기준은 Schema(프로토콜), Host(도메인), Port이며 이 3가지 중 하나라도 다르면 Cross-Origin이라고 판단한다.
+![](./image/cross-origin.png)
 
 CORS 체제는 브라우저와 서버 간의 안전한 교차 출처 요청 및 데이터 전송을 지원한다. 최신 브라우저는 XMLHttpRequest 또는 Fetch와 같은 API에서 CORS를 사용하여 교차 출처 HTTP 요청의 위험을 완화한다.
 
@@ -317,12 +338,16 @@ CORS 체제는 브라우저와 서버 간의 안전한 교차 출처 요청 및 
 2. 서버는 요청에 대한 응답을 하는데, 응답 헤더(response header)에 `Access-Control-Allow-Origin`이라는 값에 '이 리소스를 접근하는 것이 허용된 출처'를 내려준다.
 3. 이후 응답을 받은 브라우저는 자신이 보냈던 요청의 Origin과 서버가 보내준 응답의 `Access-Control-Allow-Origin`을 비교해 본 후 이 응답이 유효한 응답인지 아닌지를 결정한다.
 
-![](./img/5-network/cors.png)
+![](./image/cors.png)
 
-#### References
+> **SOP(Same-Origin Policy)란?**
 
-- [CORS란 무엇인가 ? - pilyeooong.log](https://velog.io/@pilyeooong/CORS%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)
-- [교차 출처 리소스 공유 - 위키백과](https://ko.wikipedia.org/wiki/%EA%B5%90%EC%B0%A8_%EC%B6%9C%EC%B2%98_%EB%A6%AC%EC%86%8C%EC%8A%A4_%EA%B3%B5%EC%9C%A0)
+브라우저는 기본적으로 "같은 출처에서만 리소스를 공유할 수 있다"라는 규칙을 가진 SOP 정책을 따른다. 즉, 다른 출처의 리소스를 사용하는 것을 제안하는 보안 방식이다.
+
+> **CORS의 해결방법은?**
+
+Proxy 서버를 사용한다.
+응답을 주고 받을때 프록시 서버에서 `Access-Control-Allow-Origin: *` 헤더를 담아 응답한다. 프록시 서버는 헤더를 추가하거나 요청을 허용/거부하는 역할을 중간에서 해줄 수 있다.
 
 ---
 
