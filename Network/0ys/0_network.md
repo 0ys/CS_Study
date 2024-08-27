@@ -279,7 +279,7 @@ HTTP는 암호화가 추가되지 않았기 때문에 보안에 취약한 반면
 
 HTTP 요청과 응답 메시지는 아래와 같다.
 
-![](./image/http-message.png)
+![](./images/http-message.png)
 
 > HTTP 요청 메시지
 ```
@@ -328,7 +328,7 @@ Content-Type: text/html
 교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제이다. 쉽게 말해서 CORS는 웹 페이지가 다른 브라우저에 있는 자원에 접근할 수 있도록 해주는 보안 메커니즘이다. 
 
 Cross-Origin의 판단 기준은 Schema(프로토콜), Host(도메인), Port이며 이 3가지 중 하나라도 다르면 Cross-Origin이라고 판단한다.
-![](./image/cross-origin.png)
+![](./images/cross-origin.png)
 
 CORS 체제는 브라우저와 서버 간의 안전한 교차 출처 요청 및 데이터 전송을 지원한다. 최신 브라우저는 XMLHttpRequest 또는 Fetch와 같은 API에서 CORS를 사용하여 교차 출처 HTTP 요청의 위험을 완화한다.
 
@@ -338,7 +338,7 @@ CORS 체제는 브라우저와 서버 간의 안전한 교차 출처 요청 및 
 2. 서버는 요청에 대한 응답을 하는데, 응답 헤더(response header)에 `Access-Control-Allow-Origin`이라는 값에 '이 리소스를 접근하는 것이 허용된 출처'를 내려준다.
 3. 이후 응답을 받은 브라우저는 자신이 보냈던 요청의 Origin과 서버가 보내준 응답의 `Access-Control-Allow-Origin`을 비교해 본 후 이 응답이 유효한 응답인지 아닌지를 결정한다.
 
-![](./image/cors.png)
+![](./images/cors.png)
 
 > **SOP(Same-Origin Policy)란?**
 
