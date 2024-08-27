@@ -1,4 +1,4 @@
-> **📌 질문 중 일부는 <strong>[WeareSoft님의 tech-interview](https://github.com/WeareSoft/tech-interview)</strong>를 참고하였습니다.**
+> **📌 <strong>[ai-tech-interview](https://github.com/boost-devs/ai-tech-interview/blob/main/answers/5-network.md)</strong>를 참고했습니다.**
 
 ## Table of Contents
 
